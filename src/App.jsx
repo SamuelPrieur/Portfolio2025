@@ -259,7 +259,7 @@ const App = () => {
             {language === "en" ? "fr" : "en"}
           </button>
           <a id="e" className="hidden" href="https://github.com/SamuelPrieur" target="_blank" rel="noopener noreferrer">
-            git.
+            git
           </a>
         </div>
         <hr className="nav-line" />
