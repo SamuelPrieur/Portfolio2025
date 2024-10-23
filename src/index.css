@@ -1,0 +1,465 @@
+@font-face {
+  font-family: "PPNeue Corp Wide";
+  src: url("font/PPNeueCorp-WideMedium.otf") format("opentype");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "PPNeue Montreal Italic";
+  src: url("font/PPNeueMontreal-Italic.otf") format("opentype");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "PPNeue Montreal Regular";
+  src: url("font/PPNeueMontreal-Regular.otf") format("opentype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "PPNeue Montreal Bold";
+  src: url("font/PPNeueMontreal-Bold.otf") format("opentype");
+  font-weight: 600;
+}
+
+:root {
+  --bgColor: #f5f4ed;
+  --Accent: #f74525;
+  --TextColor: #1c1c1c;
+}
+::selection {
+  background-color: var(--Accent);
+  color: var(--bgColor);
+}
+
+body {
+  margin: 0;
+  font-family: "PPNeue Montreal Bold", monospace;
+  background-color: var(--bgColor);
+  color: var(--TextColor);
+  display: flex;
+}
+
+@keyframes drawBorder {
+  0% {
+    height: 0;
+    bottom: 0;
+  }
+  100% {
+    height: 100%;
+    bottom: 0;
+  }
+}
+
+@keyframes drawVerticalLine {
+  0% {
+    height: 0;
+    bottom: 0;
+  }
+  100% {
+    height: 6rem;
+    bottom: 0;
+  }
+}
+
+@keyframes drawHorizontalLine {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  font-family: "PPNeue Montreal Regular", monospace;
+}
+
+.sidebar {
+  mix-blend-mode: difference;
+  z-index: 10000;
+  width: 3.5rem;
+  font-family: "PPNeue Montreal Regular", monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  margin: 3vh 0;
+  height: 94vh;
+}
+
+.sidebar .social-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.sidebar .social-links a,
+.sidebar .social-links button {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  text-decoration: none;
+  color: var(--bgColor);
+  font-size: 18px;
+  font-weight: bold;
+  margin: 1rem 0;
+  position: relative;
+  transition-duration: 0.3s;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.sidebar ul li a {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  text-decoration: none;
+  color: var(--bgColor);
+
+  font-size: 18px;
+  font-weight: bold;
+  margin: 1rem 0;
+  position: relative;
+  transition-duration: 0.3s;
+}
+.sidebar .name {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  text-decoration: none;
+  color: var(--bgColor);
+
+  font-size: 18px;
+  font-weight: bold;
+  margin: 1rem 0;
+  position: relative;
+  transition-duration: 0.5s;
+}
+.sidebar::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  height: 0;
+  background-color: var(--bgColor);
+  animation: drawBorder 1s ease-in-out forwards;
+}
+
+.nav-line {
+  width: 1px;
+  height: 0;
+  background-color: var(--bgColor);
+  border: none;
+  margin: 1rem 0;
+  position: relative;
+  animation: drawVerticalLine 0.25s ease-in-out 0.5s forwards;
+}
+
+strong {
+  color: var(--Accent);
+}
+
+#a {
+  transition-delay: 600ms;
+}
+
+#b {
+  transition-delay: 800ms;
+}
+
+#c {
+  transition-delay: 1000ms;
+}
+
+#d {
+  transition-delay: 1200ms;
+}
+
+#e {
+  transition-delay: 1400ms;
+}
+
+#f {
+  transition-delay: 1600ms;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateX(-50%);
+  animation-duration: 0.5s;
+}
+.hidden.show {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.hiddenT {
+  opacity: 0;
+  transform: translateY(50%);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.showT {
+  opacity: 1;
+  transform: translateY(0); /* Remise à la position d'origine */
+}
+
+#active {
+  transition: transform 1s ease, background-color 0.5s ease-out, border-radius 0.8s ease-out;
+  border-radius: 0 2rem 0 2rem;
+  background-color: var(--TextColor);
+}
+
+.hiddenT:not(#active) {
+  transition: transform 1s ease, background-color 0.5s ease-out, border-radius 0.8s ease-out;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+/* ------------------------------------ Text Apparition -------------------------------------------*/
+.line {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.word {
+  transform: translateY(5vw);
+  transition: transform 0.5s;
+}
+
+/* ----------------------------------------- Hour -------------------------------------------------*/
+
+.DateHour {
+  mix-blend-mode: difference;
+  font-family: "PPNeue Montreal Regular", monospace;
+  position: fixed;
+  color: var(--bgColor);
+  bottom: 0;
+  right: 1rem;
+}
+
+/* ----------------------------------------- Home -------------------------------------------------*/
+
+.Home {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  padding: 20vh 8vw;
+}
+
+.text-and-image {
+  display: contents;
+}
+
+.HomeText {
+  font-size: calc(50 * calc(0.01 * 10vmin));
+  margin-right: 1rem;
+  grid-column: 1 / 2;
+  font-weight: 400;
+  margin: 0;
+}
+
+.portrait {
+  width: 100%;
+  animation: fadeInScale 1s ease-in-out forwards;
+  opacity: 0;
+}
+
+.About {
+  padding: 10vh 8vw;
+  margin: 0;
+}
+
+.Journey {
+  background-color: var(--TextColor);
+  padding: 10vh 8vw;
+}
+
+.Work {
+  padding: 10vh 8vw;
+  margin: 0;
+}
+
+.horizontal-line {
+  margin: 10vh 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--TextColor);
+  border: none;
+  position: relative;
+}
+
+.horizontal-line.showL {
+  animation: drawHorizontalLine 800ms ease-in-out forwards;
+}
+
+.Title {
+  text-align: start !important;
+  font-family: "PPNeue Corp Wide";
+  font-size: 10vw;
+}
+.SubTitle {
+  font-family: "PPNeue Montreal Italic";
+  font-size: 4vw;
+}
+
+.Heading {
+  padding: 0 0 10vh 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.FlexContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.AboutText {
+  width: 65vw;
+  column-count: 2;
+  column-gap: 5vw;
+  text-align: justify;
+  font-size: 1.2vw;
+}
+.AboutImageContainer {
+  position: relative;
+  width: 65vw;
+}
+
+.AboutImage {
+  width: 65vw;
+}
+
+.AboutSubImage {
+  position: absolute;
+  bottom: -5vw;
+  left: -5vw;
+  width: 25vw;
+}
+
+.Journey {
+  margin-top: 20vh;
+  height: 100vh;
+}
+
+.Journey .Title {
+  color: var(--bgColor);
+}
+
+.Skills {
+  padding: 10vh 8vw;
+  background-color: var(--Accent);
+}
+
+.Skills .Heading {
+  padding: 0;
+}
+
+.Skills .Title {
+  color: var(--bgColor);
+}
+.Skills .Title .SubTitle {
+  color: var(--TextColor);
+}
+
+.tagcloud {
+  width: 100%;
+  margin: 0 auto;
+  color: var(--bgColor);
+  font-size: 2vw;
+}
+
+.SkillsContainer {
+  display: flex;
+  gap: 5vw;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--bgColor);
+}
+
+.SkillsContainer div {
+  width: 100%;
+  padding: 2vw;
+}
+
+.grid-container {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  grid-template-columns: 1fr 1fr; /* 2 colonnes */
+  column-gap: 5vw;
+  margin: 10vh auto;
+}
+
+.grid-container a:nth-of-type(1) .Project {
+  width: 35vw;
+}
+
+.grid-container a:nth-of-type(2) .Project {
+  width: 40vw;
+}
+
+.grid-container a:nth-of-type(3) .Project {
+  width: 40vw;
+}
+
+.grid-container a:nth-of-type(4) .Project {
+  width: 30vw;
+}
+
+.left {
+  grid-column: 1; /* positionne l'élément à gauche */
+}
+
+.right {
+  grid-column: 2; /* positionne l'élément à droite */
+}
+
+.Contact {
+  position: relative;
+  padding: 10vh 8vw;
+  margin: 0;
+  color: var(--bgColor);
+  background-color: var(--TextColor);
+  text-align: center;
+  height: 80vh;
+}
+.Contact a {
+  color: var(--bgColor);
+  text-align: center;
+  text-decoration: none;
+  font-family: "PPNeue Corp Wide";
+  font-size: 5vw;
+  margin: 20vh auto;
+}
+
+.Contact p {
+  position: absolute;
+  bottom: 2vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2vw;
+}
